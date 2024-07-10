@@ -1,4 +1,4 @@
-const hacks = "cdn.polyfill.io";
+const hacks = ["cdn.polyfill.io", "cdn.polyfill.com"];
 
 const redirect = () => {
   window.location.href =
@@ -9,7 +9,7 @@ const redirect = () => {
 document.addEventListener("DOMContentLoaded", () => {
   let scriptTags = document.querySelectorAll("script");
   scriptTags.forEach((script) => {
-    if (script.src.includes(hacks)) {
+    if (hacks.some((hack) => script.src.includes(hack))) {
       window.stop();
       redirect();
     }
@@ -20,7 +20,10 @@ document.addEventListener("DOMContentLoaded", () => {
 const observer = new MutationObserver((mutations) => {
   mutations.forEach((mutation) => {
     mutation.addedNodes.forEach((node) => {
-      if (node.tagName === "SCRIPT" && node.src.includes(hacks)) {
+      if (
+        node.tagName === "SCRIPT" &&
+        hacks.some((hack) => node.src.includes(hack))
+      ) {
         window.stop();
         redirect();
       }
