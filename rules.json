@@ -9,5 +9,16 @@
       "urlFilter": "*://cdn.polyfill.io/*",
       "resourceTypes": ["script"]
     }
+  },
+  {
+    "id": 2,
+    "priority": 2,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "urlFilter": "*://cdn.polyfill.com/*",
+      "resourceTypes": ["script"]
+    }
   }
 ]
